@@ -30,4 +30,4 @@ bower_components/
 
 client/.DS_Store
 
-lib/api_key.js
+lib/movieAPI.js
