@@ -44,7 +44,11 @@ class MovieList extends React.Component {
     let movies = this.state.currentResults;
     for (let i = 0; i < movies.length; i++) {
       if (movies[i].id === movieId) {
+        let data = JSON.stringify({ movieId: movies[i].movieId, watchedFlag: !movies[i].watchedFlag });
+        console.log('stringified =======', data, function() {}, 'json');
+        $.post('http://localhost:3000/watchedFlag', data)
         movies[i].watchedFlag ? movies[i].watchedFlag = false : movies[i].watchedFlag = true;
+        break;
       }
     }
     this.setState({
@@ -56,8 +60,8 @@ class MovieList extends React.Component {
     let movies = this.props.movies;
     let filterResults = [];
     let flag = event.target.value === 'watched' ? true : false;
-    console.log(flag);
     for (let i = 0; i < movies.length; i++) {
+      console.log(movies[i].watchedFlag);
       if (movies[i].watchedFlag === flag) {
         filterResults.push(movies[i]);
       }
@@ -101,6 +105,11 @@ class MovieList extends React.Component {
 }
 
 $.get('http://localhost:3000/load', function (data) {
-  ReactDOM.render(<MovieList movies={data} />, document.getElementById('app'));
+  console.log('Load request status:', data);
+  $.get('http://localhost:3000/movies', function (data) {
+    ReactDOM.render(<MovieList movies={data} />, document.getElementById('app'));
+  })
 })
+
+
 
