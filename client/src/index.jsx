@@ -100,7 +100,7 @@ class MovieList extends React.Component {
   }
 }
 
-$.get('http://localhost:3000/movies', function (data) {
+$.get('http://localhost:3000/load', function (data) {
   ReactDOM.render(<MovieList movies={data} />, document.getElementById('app'));
 })
 

@@ -12,6 +12,6 @@ app.use('/', router);
 
 app.listen(3000, function () { console.log('MovieList app listening on port 3000!') });
 
-exports.modules = app;
+module.exports = app;
 
 
