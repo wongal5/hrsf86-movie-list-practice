@@ -20,11 +20,14 @@ class MovieList extends React.Component {
 
   addMovie(query) {
     let body = {
-      data: query
+      query: query
     }
-    $.post('http://localhost:3000/movies', JSON.stringify(body), function(res) {
-      // eventually do a refresh setState here.
-    })
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/movies',
+      headers: { 'Content-Type': 'application/json' },
+      data: JSON.stringify(body)
+    });
   }
 
   newSearch(query) {
@@ -67,7 +70,6 @@ class MovieList extends React.Component {
     let filterResults = [];
     let flag = event.target.value === 'watched' ? true : false;
     for (let i = 0; i < movies.length; i++) {
-      console.log(movies[i].watchedFlag);
       if (movies[i].watchedFlag === flag) {
         filterResults.push(movies[i]);
       }
@@ -110,12 +112,16 @@ class MovieList extends React.Component {
   }
 }
 
-$.get('http://localhost:3000/load', function (res) {
-  console.log('Load request status:', res);
-  $.get('http://localhost:3000/movies', function (data) {
-    ReactDOM.render(<MovieList movies={data} />, document.getElementById('app'));
+let initialLoad = function() {
+  $.get('http://localhost:3000/load', function (res) {
+    console.log('Load request status:', res);
+    $.get('http://localhost:3000/movies', function (data) {
+      ReactDOM.render(<MovieList movies={data} />, document.getElementById('app'));
+    })
   })
-})
+}
+
+initialLoad();
 
 
 

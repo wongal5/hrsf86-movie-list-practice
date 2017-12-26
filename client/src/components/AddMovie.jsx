@@ -19,7 +19,7 @@ export class AddMovie extends React.Component {
   }
 
   handleSearch(event) {
-    event.preventDefault();
+    // event.preventDefault();
     this.props.callbackSearch(this.state.searchValue);
     this.setState({
       searchValue: ''
