@@ -5,9 +5,11 @@ const Movies = db.define('movies', {
   id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
   title: Sequelize.STRING,
   movieId: Sequelize.INTEGER,
-  poster: Sequelize.STRING,
-  releaseDate: Sequelize.STRING,
-  description: Sequelize.STRING(2000)
+  poster_path: Sequelize.STRING,
+  release_date: Sequelize.STRING,
+  vote_average: Sequelize.DECIMAL,
+  overview: Sequelize.TEXT,
+  watchedFlag: Sequelize.BOOLEAN
 })
 
 db.sync();
