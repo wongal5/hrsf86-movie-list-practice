@@ -44,9 +44,15 @@ class MovieList extends React.Component {
     let movies = this.state.currentResults;
     for (let i = 0; i < movies.length; i++) {
       if (movies[i].id === movieId) {
-        let data = JSON.stringify({ movieId: movies[i].movieId, watchedFlag: !movies[i].watchedFlag });
-        console.log('stringified =======', data, function() {}, 'json');
-        $.post('http://localhost:3000/watchedFlag', data)
+        let data = { movieId: movies[i].movieId, watchedFlag: !movies[i].watchedFlag };
+        // update database
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:3000/watchedFlag',
+          headers: {'Content-Type': 'application/json'},
+          data: JSON.stringify(data)
+        });
+        // update current session only
         movies[i].watchedFlag ? movies[i].watchedFlag = false : movies[i].watchedFlag = true;
         break;
       }
@@ -104,8 +110,8 @@ class MovieList extends React.Component {
   }
 }
 
-$.get('http://localhost:3000/load', function (data) {
-  console.log('Load request status:', data);
+$.get('http://localhost:3000/load', function (res) {
+  console.log('Load request status:', res);
   $.get('http://localhost:3000/movies', function (data) {
     ReactDOM.render(<MovieList movies={data} />, document.getElementById('app'));
   })
