@@ -3,7 +3,6 @@ import ReactDOM  from 'react-dom';
 import { Movie } from './components/Movie.jsx';
 import { Search } from './components/Search.jsx';
 import { AddMovie } from './components/AddMovie.jsx';
-var movies = require(__dirname + '/testData.js');
 
 class MovieList extends React.Component {
   constructor(props) {
@@ -20,8 +19,12 @@ class MovieList extends React.Component {
   }
 
   addMovie(query) {
-    //currently does nothing
-    console.log(query);
+    let body = {
+      data: query
+    }
+    $.post('http://localhost:3000/movies', JSON.stringify(body), function(res) {
+      // eventually do a refresh setState here.
+    })
   }
 
   newSearch(query) {
@@ -97,4 +100,7 @@ class MovieList extends React.Component {
   }
 }
 
-ReactDOM.render( <MovieList movies={movies} />, document.getElementById('app'));
+$.get('http://localhost:3000/movies', function (data) {
+  ReactDOM.render(<MovieList movies={data} />, document.getElementById('app'));
+})
+
