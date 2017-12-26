@@ -92,7 +92,7 @@ class MovieList extends React.Component {
             (this.state.currentResults.map(movie => {
                 return <Movie movie={movie} key={movie.id} callbackWatched={this.addCheckedOff} />
               })) : 
-              (<p> No results found! </p>)
+              ( <div className="row col-lg-12"><p> No results found!</p></div>)
             }
         </div>
       </div>
