@@ -16,6 +16,7 @@ db.sync();
 
 module.exports.Movies = Movies;
 
+// if mysql isn't starting, make sure you have run mysql.server start in bash
 
 
 

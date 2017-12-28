@@ -13,8 +13,6 @@ let headers = {
 
 let url = `http://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`
 
-let movies = [];
-
 module.exports = {
   getMovies: function(req, res) {
     db.Movies.findAll().then(movies => {
