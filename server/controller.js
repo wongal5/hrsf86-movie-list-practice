@@ -60,9 +60,9 @@ let databaseInsert = function(data, resultsLimit, res) {
         movieId: data[i].id,
       }, defaults: {
         title: data[i].title,
-        poster_path: data[i].poster_path,
-        release_date: data[i].release_date,
-        vote_average: data[i].vote_average,
+        posterPath: data[i].poster_path,
+        releaseDate: data[i].release_date,
+        voteAverage: data[i].vote_average,
         overview: data[i].overview,
         watchedFlag: false
       }
